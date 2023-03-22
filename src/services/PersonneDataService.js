@@ -1,6 +1,6 @@
 import http from "../http-common";
 
-class ChaussetteDataService {
+class PersonneDataService {
     getAll() {
     return http.get("/chaussette");
     }
@@ -11,7 +11,7 @@ class ChaussetteDataService {
     return http.post("/chaussette", data);
     }
     update(id, data) {
-    return http.put(`/chaussette/${id}`, data);
+    return http.put(`/updatePersonne/${id}`, data);
     }
     delete(id) {
     return http.delete(`/chaussette/${id}`);
@@ -24,4 +24,4 @@ class ChaussetteDataService {
     }
 }
     
-export default new ChaussetteDataService();
+export default new PersonneDataService();
