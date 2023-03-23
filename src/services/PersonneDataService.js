@@ -2,25 +2,22 @@ import http from "../http-common";
 
 class PersonneDataService {
     getAll() {
-    return http.get("/chaussette");
+    return http.get("/iste/personne");
     }
     get(id) {
-    return http.get(`/chaussette/${id}`);
+    return http.get(`/iste/personne/${id}`);
     }
     create(data) {
-    return http.post("/chaussette", data);
+    return http.post("/insertPersonne", data);
     }
     update(id, data) {
     return http.put(`/updatePersonne/${id}`, data);
     }
     delete(id) {
-    return http.delete(`/chaussette/${id}`);
+    return http.delete(`/deletePersonne/${id}`);
     }
-    deleteAll() {
-    return http.delete(`/chaussette`);
-    }
-    findByTitle(titre) {
-    return http.get(`/chaussette?titre=${titre}`);
+    getVoiture(id) {
+    return http.get(`/iste/personne/voiture/${id}`);
     }
 }
     

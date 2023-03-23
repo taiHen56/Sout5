@@ -1,0 +1,4 @@
+Yo Raf du futur, tu me diras ce que t'en penses de ces idées que j'ai en faisant les routes 
+
+1) Peut être te faudra une route pour les marques au cas ou pour que l'utilisateur n'aie pas à l'écrire 
+2) Une route pour update un trajet? parce que hein ....
