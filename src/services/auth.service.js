@@ -10,6 +10,13 @@ class AuthService {
             }).then(response => {
                 if (response.data.token) {
                     localStorage.setItem('user', JSON.stringify(response.data));
+                    axios.get(API_URL + 'liste/personne/user/' + response.data.id_user)
+                        .then(personResponse => {
+                            if (personResponse.data.nom) {
+                                // User has a related Person entity in the database
+                                localStorage.setItem('person', JSON.stringify(personResponse.data));
+                            }
+                    });
                 }
                 return response.data;
             });
