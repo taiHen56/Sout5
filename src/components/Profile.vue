@@ -1,38 +1,43 @@
 <template>
-    <div class="container">
-        <header class="jumbotron">
-            <h3>
-                <strong>{{currentUser.username}}</strong> Profile
-            </h3>
-        </header>
-        <p>
-            <!-- A supprimer -->
-            <strong>Token:</strong>
-            {{currentUser.api_token}}
-        </p>
-        <p>
-            <strong>Id:</strong>
-            {{currentUser.id}}
-        </p>
-        <p>
-            <strong>Email:</strong>
-            {{currentUser.email}}
-        </p>
-        <strong>Authorities:</strong>
-        <ul>
-            <li v-for="role in currentUser.roles" :key="role">{{role}}</li>
-        </ul>
-    </div>
-    <div v-if="inscrit" class="container">
-        <!-- Cherche ici comment faire avec Tailwind/BootyStrap -->
-    </div>
-    <div v-else>
-        Renseignez vos données personnelles pour pouvoir
-        prendre des covoiturages avec les autres ... ! 
-        <router-link to="/register" class="nav-link">
-            <font-awesome-icon icon="user-plus" /> Finaliser
-          </router-link> 
+    <div class="container mx-auto my-5 p-5">
+        <div class="md:flex no-wrap md:-mx-2 ">
+            <div class="w-full md:w-3/12 md:mx-2">
+                <!-- Profile Card -->
+                <div class="bg-white p-3 border-t-4 border-green-400">
+                    <div class="image overflow-hidden">
+                        <img class="h-auto w-full mx-auto"
+                            src="../images/png-transparent-profile-user-icon-computer-icons-user-profile-head-ico-miscellaneous-black-desktop-wallpaper.png"
+                            alt="image de profil">
+                    </div>
+                    <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{{ currentUser.username }}</h1>
+                    <h3 class="text-gray-600 font-lg text-semibold leading-6">Mot de passe :
+                        <div>
+                            <div class="password" v-html="passwordVisible ? currentUser.password : maskedPassword">
+                            </div>
+                            <!-- Peut être faudra mettre le tout dans une div encore -->
+                            <button @click="togglePasswordVisibility">{{ passwordVisible ? 'Hide' : 'Show' }}
+                            <i class="fas" :class="{ 'fa-eye-slash': showPassword, 'fa-eye': !showPassword }"></i></button>
+                        </div>
 
+                    </h3>
+                    <p class="text-sm text-gray-500 hover:text-gray-600 leading-6">Lorem ipsum dolor sit amet
+                        consectetur adipisicing elit.
+                        Reprehenderit, eligendi dolorum sequi illum qui unde aspernatur non deserunt</p>
+                    <ul
+                        class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
+                        <li class="flex items-center py-3">
+                            <span>Status</span>
+                            <span class="ml-auto"><span
+                                    class="bg-green-500 py-1 px-2 rounded text-white text-sm">Active</span></span>
+                        </li>
+                        <li class="flex items-center py-3">
+                            <span>Member since</span>
+                            <span class="ml-auto">Nov 07, 2016</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -41,6 +46,9 @@
         name: 'ProfilE',
         data() {
             return {
+
+                passwordVisible: false,
+                maskedPassword: '',
                 inscrit: false
             }
         },
@@ -61,9 +69,18 @@
             } else {
                 this.inscrit = true;
             }
+        },
+        methods: {
+            togglePasswordVisibility() {
+                this.passwordVisible = !this.passwordVisible;
+                if (!this.passwordVisible) {
+                    this.maskedPassword = this.password.replace(/./g, '*');
+                } else {
+                    this.maskedPassword = '';
+                }
+            }
         }
-    }
-;
+    };
 </script>
 
 <style>
