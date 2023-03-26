@@ -4,12 +4,12 @@
             <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
             <form name="form" @submit="handleLogin" @submit.prevent="handleRegister">
                 <label for="username">Login</label>
-                <input v-model="user.username" v-validate="'required|min:3|max:20'" type="text" class="form-control"
+                <input id="username" v-model="user.username" v-validate="'required|min:3|max:20'" type="text" class="form-control"
                     name="username" />
                 <div v-if="submitted && errors.has('username')" class="alert-danger">Le Login est obligatoire</div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input v-model="user.password" v-validate="'required|min:6|max:40'" type="password"
+                    <input id="password" v-model="user.password" v-validate="'required|min:2|max:40'" type="password"
                         class="form-control" name="password" />
                     <div v-if="submitted && errors.has('password')" class="alert-danger">Le pwd est obligatoire</div>
                 </div>
@@ -55,6 +55,7 @@
         methods: {
             handleLogin() {
                 this.loading = true;
+                console.log(this.user.username)
                 this.$store.dispatch("auth/login", this.user).then(
                     () => {
                         this.$router.push("/profile");

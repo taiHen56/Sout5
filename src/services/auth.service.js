@@ -3,13 +3,19 @@ const API_URL = 'http://127.0.0.1:8000/';
 
 class AuthService {
     login(user) {
+        console.log(user.username)
         return axios
-            .post(API_URL + 'login', {
-                username: user.username,
-                password: user.password
+            .post(API_URL + 'login',null, {
+                params: {
+    username: user.username,
+    pwd: user.password
+  }
+                // username: user.username,
+                // password: user.password
             }).then(response => {
                 if (response.data.token) {
                     localStorage.setItem('user', JSON.stringify(response.data));
+                    console.log(response.data.id_user)
                     axios.get(API_URL + 'liste/personne/user/' + response.data.id_user)
                         .then(personResponse => {
                             if (personResponse.data.nom) {
@@ -18,6 +24,7 @@ class AuthService {
                             }
                     });
                 }
+                console.log(user.username)
                 return response.data;
             });
     }
