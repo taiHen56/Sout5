@@ -52,7 +52,7 @@
         },
         methods: {
     handleRegister() {
-      console.log("user:"+this.user.username+this.user.password)
+      console.log("user:"+this.user.username+this.user.email+this.user.password)
        this.message = "";
       this.successful = false;
       this.loading = true;
