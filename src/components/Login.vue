@@ -58,7 +58,7 @@
                 console.log(this.user.username)
                 this.$store.dispatch("auth/login", this.user).then(
                     () => {
-                        this.$router.push("/profile");
+                        this.$router.push("/");
                     },
                     (error) => {
                         this.loading = false;

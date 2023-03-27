@@ -87,8 +87,7 @@
                             </div>
                         </div>
                         <button
-                            class="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4">Show
-                            Full Information</button>
+                            class="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4">Modifier</button>
                     </div>
                     <!-- End of about section -->
 
@@ -109,8 +108,8 @@
                                     </span>
                                     <span class="tracking-wide">Vos voitures</span>
                                 </div>
-                                <ul  v-if="currentUser.cars && currentUser.cars.length"  class="list-inside space-y-2">
-                                    <div v-for="(carList, index) in currentUser.cars" :key="index">
+                                <ul  v-if="currentPerson.cars && currentPerson.cars.length"  class="list-inside space-y-2">
+                                    <div v-for="(carList, index) in currentPerson.cars" :key="index">
                                         <div v-for="car in carList" :key="car.id">
                                             <li>
                                                 <div class="text-teal-600">{{ car.marque }} {{ car.modele }} </div>
@@ -137,6 +136,8 @@
 </template>
 
 <script>
+// import axios from 'axios';
+// const API_URL = 'http://127.0.0.1:8000/';
     export default {
         name: 'ProfilE',
         data() {
@@ -152,29 +153,38 @@
                 return this.$store.state.auth.user;
             },
             currentPerson() {
-                return this.$store.state.auth.person;
+                console.log(localStorage.getItem('person'))
+                
+                return JSON.parse(localStorage.getItem('person'));
             }
         },
         mounted() {
             if (!this.currentUser) {
                 this.$router.push('/login');
             }
-            if (!this.currentPerson) {
-                this.inscrit = false;
-            } else {
-                this.inscrit = true;
-            }
+            // this.getCurrentPerson();
         },
         methods: {
-            togglePasswordVisibility() {
-                this.passwordVisible = !this.passwordVisible;
-                if (!this.passwordVisible) {
-                    this.maskedPassword = this.password.replace(/./g, '*');
-                } else {
-                    this.maskedPassword = '';
-                }
-            }
-        }
+        // async getCurrentPerson() {
+        //     const personResponse = await axios.get(API_URL + 'liste/personne/user/' + parseInt(this.user.id_user), {
+        //         headers: {
+        //             token: this.user.token
+        //         }
+        //     });
+
+        //     if (personResponse.data.nom) {
+        //         // User has a related Person entity in the database
+        //         localStorage.setItem('person', JSON.stringify(personResponse.data));
+        //         this.person = personResponse.data;
+        //         this.inscrit = true;
+        //     } else {
+        //         localStorage.removeItem('person');
+        //         this.person = null;
+        //         this.inscrit = false;
+        //     }
+        // }
+    }
+
     };
 </script>
 
