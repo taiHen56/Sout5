@@ -7,6 +7,9 @@ class MarqueDataService {
     create(data) {
     return http.post("/insertMarque", data);
     }
+    getAll(){
+        return http.get("/listeModeles");
+    }
    
 }
     

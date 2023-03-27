@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import Login from '../components/Login.vue'
 import Register from '../components/Register.vue'
 import Profile from '../components/Profile.vue'
+import InscriptionPersonne from '../components/InscriptionPersonne.vue'
 const routes = [
   {
     path: '/',
@@ -19,6 +20,11 @@ const routes = [
   {
     path: '/profile',
     component: Profile
+  },
+  
+  {
+    path: '/inscriptPersonne',
+    component: InscriptionPersonne
   },
   {
     path: '/about',
