@@ -127,7 +127,8 @@
                                 <p class="text-sm text-gray-500 hover:text-gray-600 leading-6">Rien à afficher ici pour
                                     l'instant ... </p>
                             </ul>
-                            <button class="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4"> Ajouter une voiture...</button>
+                            <router-link to="/ajoutVoiture"><button class="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4"> Ajouter une voiture...</button></router-link>
+                            
                         </div>
                     </div>
                     <!-- End of Experience and education grid -->

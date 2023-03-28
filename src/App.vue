@@ -8,6 +8,7 @@
     </div>
     <div v-else>
       <router-link  to="/profile">Profil</router-link> |
+      <router-link  to="/rechercheTrajet">Rechercher un trajet</router-link> |
     </div>
     <a class="nav-link" v-if="currentUser" href @click.prevent="logOut">Logout</a>
   </nav>
@@ -19,6 +20,11 @@ export default {
   computed: {
     currentUser() {
       return this.$store.state.auth.user;
+    },
+    currentPerson() {
+      console.log(localStorage.getItem('person'))
+
+      return JSON.parse(localStorage.getItem('person'));
     }
   },
   methods: {

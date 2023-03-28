@@ -7,17 +7,17 @@ class InscriptionDataService {
     }
     //Pour avoir les trajets réservés de l'utilisateur
     getUser(data) {
-    return http.get(`/listeInscriptionUser`, data);
+    return http.get(`/listeInscriptionUser`,null, data);
     }
     //Pour avoir les passagers d'un trajet donnée
     getTrajet(data) {
-    return http.get(`/listeInscriptionConducteur`, data);
+    return http.get(`/listeInscriptionConducteur`,null, data);
     }
     create(data) {
-    return http.post("/insertInscription", data);
+    return http.post("/insertInscription",null, data);
     }
     delete(data) {
-    return http.delete(`/deleteInscription`, data);
+    return http.delete(`/deleteInscription`,null, data);
     }
 
 }

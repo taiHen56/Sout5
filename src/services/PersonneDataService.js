@@ -5,19 +5,19 @@ class PersonneDataService {
     return http.get("/liste/personne");
     }
     get(id) {
-    return http.get(`/liste/personne/${id}`);
+    return http.get(`/liste/personne/`+ parseInt(id));
     }
     create(data) {
-    return http.post("/insertPersonne", data);
+    return http.post("/insertPersonne",null, data);
     }
     update(id, data) {
-    return http.put(`/updatePersonne/${id}`, data);
+    return http.put(`/updatePersonne/`+ parseInt(id),null, data);
     }
     delete(id) {
-    return http.delete(`/deletePersonne/${id}`);
+    return http.delete(`/deletePersonne/`+ parseInt(id));
     }
     getVoiture(id) {
-    return http.get(`/liste/personne/voiture/${id}`);
+    return http.get(`/liste/personne/voiture/`+ parseInt(id));
     }
 }
     

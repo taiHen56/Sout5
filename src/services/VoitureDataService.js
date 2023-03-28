@@ -5,10 +5,10 @@ class VoitureDataService {
     return http.get("/listeVoiture");
     }
     create(data) {
-    return http.post("/insertVoiture", data);
+    return http.post("/insertVoiture",null, data);
     }
     delete(id) {
-    return http.delete(`/deleteVoiture/${id}`);
+    return http.delete(`/deleteVoiture/`+parseInt(id) );
     }
 }
     
