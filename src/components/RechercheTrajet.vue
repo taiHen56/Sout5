@@ -23,7 +23,7 @@
             <h4>Liste de Trajets </h4>
             <ul class="list-group">
                 <div v-for="(TrajetListe, index) in Trajets" :key="index" >
-                <li class="list-group-item" :class="{ active: index == currentIndex }"
+                <li class="list-group-item" :class="{ active: index == currentIndex,  'text-red-600': Trajet.id_pers === currentPerson.id, 'text-gray-500': Trajet.id_pers === currentPerson.id   }"
                     v-for="Trajet in TrajetListe" :key="Trajet.id" @click="setActiveTrajet(Trajet, index)">
                     {{ Trajet.villeDepart }} ==> {{ Trajet.villeArrivee }} à  {{ Trajet.date }}
                 </li>
@@ -46,7 +46,7 @@
                     <label><strong>Places:</strong></label> {{ currentTrajet.places }}
                 </div>
             
-                <router-link :to="'/Trajet/' + currentTrajet.id" class="badge badge-warning"><button class="btn"
+                <router-link :to="'/Trajet/' + currentTrajet" class="badge badge-warning"><button class="btn"
                         style="background-color:seagreen;">PLus de détails...</button> </router-link>
             </div>
             <div v-else>
