@@ -1,5 +1,8 @@
 <template>
-    <div class="list row">
+     <div class="container bg-gray-100 mx-auto my- p-5">
+        <div class="md:flex no-wrap md:-mx-2 ">
+            <div class="w-full md:w-6/12 md:mx-2">
+    <div class="list row bg-gray-100">
         <div class="col-md-8">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Rechercher par ville de depart" v-model="depart" />
@@ -35,6 +38,8 @@
                 Supprimer tout
             </button>
         </div>
+    </div>
+    <div class="w-full md:w-6/12 mx-2 h-64">
         <div class="col-md-6">
             <div v-if="currentTrajet">
 
@@ -46,7 +51,7 @@
                     <label><strong>Places:</strong></label> {{ currentTrajet.places }}
                 </div>
             
-                <router-link :to="'/Trajet/' + currentTrajet" class="badge badge-warning"><button class="btn"
+                <router-link :to="'/trajetVue/' + currentTrajet.id" class="badge badge-warning"><button class="btn"
                         style="background-color:seagreen;">PLus de détails...</button> </router-link>
             </div>
             <div v-else>
@@ -55,6 +60,9 @@
             </div>
         </div>
     </div>
+    </div>
+</div>
+</div>
 </template>
 
 <script>

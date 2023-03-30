@@ -6,6 +6,7 @@ import Profile from '../components/Profile.vue'
 import InscriptionPersonne from '../components/InscriptionPersonne.vue'
 import AjoutVoiture from '../components/AjoutVoiture.vue'
 import RechercheTrajet from '../components/RechercheTrajet.vue'
+import TrajetVue from '../components/TrajetVue.vue'
 const routes = [
   {
     path: '/',
@@ -18,6 +19,10 @@ const routes = [
   {
     path: '/register',
     component: Register
+  },
+  {
+    path: '/trajetVue/:trajet',
+    component: TrajetVue
   },
   {
     path: '/profile',

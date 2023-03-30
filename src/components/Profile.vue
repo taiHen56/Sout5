@@ -1,9 +1,9 @@
 <template>
-    <div class="container mx-auto my-5 p-5">
+    <div class="container bg-gray-100 mx-auto my- p-5">
         <div class="md:flex no-wrap md:-mx-2 ">
             <div class="w-full md:w-3/12 md:mx-2">
                 <!-- Profile Card -->
-                <div class="bg-white p-3 border-t-4 border-green-400">
+                <div class="bg-white p-3 border-t-4 border-blue-400">
                     <div class="image overflow-hidden">
                         <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card h-auto w-full mx-auto" />
                     </div>
@@ -15,7 +15,7 @@
                             <li class="flex items-center py-3">
                                 <span>Status</span>
                                 <span class="ml-auto">
-                                    <span class="bg-green-500 py-1 px-2 rounded text-white text-sm">Active</span>
+                                    <span class="bg-blue-400 py-1 px-2 rounded text-white text-sm">Active</span>
                                 </span>
                             </li>
                             <li class="flex items-center py-3">
@@ -98,7 +98,7 @@
                 <!-- Experience and education -->
                 <div v-if="currentPerson" class="bg-white p-3 shadow-sm rounded-sm">
 
-                    <div class="grid grid-cols-1">
+                    <div class="grid grid-cols-2">
                         <div>
                             <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
                                 <span clas="text-green-500">
@@ -114,7 +114,7 @@
                                 <div v-for="(carList, index) in currentPerson.cars" :key="index">
                                     <div v-for="car in carList" :key="car.id">
                                         <li>
-                                            <div class="text-teal-600">{{ car.marque }} {{ car.modele }} </div>
+                                            <div class="text-blue-500">{{ car.marque }} {{ car.modele }} </div>
                                             <div class="text-gray-500 text-xs">Matricule: {{ car.matricule }}</div>
                                             <div class="text-gray-500 text-xs">Couleur: {{ car.color }}</div>
                                             <div class="text-gray-500 text-xs">Places: {{ car.places }}</div>
@@ -130,6 +130,37 @@
                             <router-link to="/ajoutVoiture"><button class="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4"> Ajouter une voiture...</button></router-link>
                             
                         </div>
+                        <div>
+                            <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
+                                <span clas="text-green-500">
+                                    <svg class="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                    </svg>
+                                </span>
+                                <span class="tracking-wide">Vos Réservations</span>
+                            </div>
+                            <ul v-if="trajetsReserves && trajetsReserves.length" class="list-inside space-y-2">
+                                <div v-for="(trajet, index) in trajetsReserves" :key="index">
+                                    
+                                        <li>
+                                            <div class="text-teal-600">{{ trajet.villeDepart }} {{ trajet.villeArrivee }} </div>
+                                            <div class="text-gray-500 text-xs">Conducteur: {{ trajet.conducteurNom }} {{ trajet.conducteurPrenom }}</div>
+                                            <div class="text-gray-500 text-xs">Date de départ: {{ trajet.date }}</div>
+                                            <div class="text-gray-500 text-xs">Kilomètres: {{ trajet.Kms }}</div>
+                                        </li>
+                                    
+                                </div>
+                                
+                            </ul>
+                            <ul v-else class="list-inside space-y-2">
+                                <p class="text-sm text-gray-500 hover:text-gray-600 leading-6">Rien à afficher ici pour
+                                    l'instant ... </p>
+                            </ul>
+                            <router-link to="/rechercheTrajet"><button class="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4"> Chercher un trajet...</button></router-link>
+                            
+                        </div>
                     </div>
                     <!-- End of Experience and education grid -->
                 </div>
@@ -140,15 +171,15 @@
 </template>
 
 <script>
-// import axios from 'axios';
-// const API_URL = 'http://127.0.0.1:8000/';
+import InscriptionDataService from "../services/InscriptionDataService";
 export default {
     name: 'ProfilE',
     data() {
         return {
             passwordVisible: false,
             maskedPassword: '',
-            inscrit: false
+            inscrit: false,
+            trajetsReserves: []
         }
     },
     computed: {
@@ -168,23 +199,21 @@ export default {
         // this.getCurrentPerson();
     },
     methods: {
-        // async getCurrentPerson() {
-        //     const personResponse = await axios.get(API_URL + 'liste/personne/user/' + parseInt(this.user.id_user), {
-        //         headers: {
-        //             token: this.user.token
-        //         }
-        //     });
-        //     if (personResponse.data.nom) {
-        //         // User has a related Person entity in the database
-        //         localStorage.setItem('person', JSON.stringify(personResponse.data));
-        //         this.person = personResponse.data;
-        //         this.inscrit = true;
-        //     } else {
-        //         localStorage.removeItem('person');
-        //         this.person = null;
-        //         this.inscrit = false;
-        //     }
-        // }
+        trajetReserves() {
+            var data = {
+                params: {
+                    id_pers: this.currentPerson.id
+                }
+            };
+            InscriptionDataService.getUser(data)
+            .then(response => {
+                    this.trajetReserves = response.data;
+                    console.log(response.data);
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+      }
     }
 };
 </script>

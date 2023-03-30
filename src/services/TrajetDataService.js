@@ -7,6 +7,9 @@ class TrajetDataService {
     get(data) {
     return http.get(`/rechercheTrajet`,data);
     }
+    getTrajet(id) {
+        return http.get(`/rechercheTrajet/`+ parseInt(id));
+        }
     create(data) {
     return http.post("/insertTrajet",null, data);
     }

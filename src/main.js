@@ -6,6 +6,7 @@ import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import * as VeeValidate from 'vee-validate';
 import './assets/main.css'
+
 import { initFlowbite } from 'flowbite'
 import * as yup from "yup";
 // import 'bootstrap'
